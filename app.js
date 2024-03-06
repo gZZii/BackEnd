@@ -6,9 +6,6 @@ const userRoutes = require('./routes/user');
 const path = require('path');
 
 app.use(express.json());
-// app.use(cors({
-//     origin:'*'
-// }))
 
 const dbURL = 
     "mongodb+srv://guillaumeadelet:LLcavDBzTp3Rdmgi@monvieuxgrimoire.axbq0jw.mongodb.net/?retryWrites=true&w=majority"
@@ -31,4 +28,4 @@ app.use('/api/books', bookRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-module.exports = app; // Export the app object
+module.exports = app;

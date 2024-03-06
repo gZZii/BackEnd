@@ -1,10 +1,5 @@
 const Book = require("../models/Book");
 
-// ROUTES FROM API DOCUMENTATION
-// Don't forget to add the Bearer token to the headers of the requests
-// if userId doesn't match the token, the request will be rejected with a 403 status code
-// sort by model/book order
-
 exports.getAllBooks = (req, res, next) => {
   Book.find()
     .then((books) => res.status(200).json(books))
