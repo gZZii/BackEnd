@@ -1,12 +1,16 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+
+// Importation des routeurs pour les livres et les utilisateurs
 const bookRoutes = require('./routes/book');
 const userRoutes = require('./routes/user');
 const path = require('path');
 
+// Middleware pour parser le corps des requêtes en JSON
 app.use(express.json());
 
+// Chaîne de connexion à MongoDB
 const dbURL = 
     "mongodb+srv://guillaumeadelet:LLcavDBzTp3Rdmgi@monvieuxgrimoire.axbq0jw.mongodb.net/?retryWrites=true&w=majority"
 
@@ -23,9 +27,10 @@ app.use((req, res, next) => {
     next();
   });
 
-
+// Définition des routes principales de l'API
 app.use('/api/books', bookRoutes);
 app.use('/api/auth', userRoutes);
+
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
