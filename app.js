@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 // Importation des routeurs pour les livres et les utilisateurs
 const bookRoutes = require('./routes/book');
@@ -10,9 +11,11 @@ const path = require('path');
 // Middleware pour parser le corps des requêtes en JSON
 app.use(express.json());
 
+const { DB_USER, DB_PASSWORD } = process.env;
+
 // Chaîne de connexion à MongoDB
 const dbURL = 
-    "mongodb+srv://guillaumeadelet:LLcavDBzTp3Rdmgi@monvieuxgrimoire.axbq0jw.mongodb.net/?retryWrites=true&w=majority"
+    `mongodb+srv://${DB_USER}:${DB_PASSWORD}@monvieuxgrimoire.axbq0jw.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose
     .connect(dbURL)
