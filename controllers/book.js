@@ -1,4 +1,5 @@
 const Book = require("../models/Book");
+const fs = require("fs");
 
 // Récupérer tous les livres
 exports.getAllBooks = (req, res, next) => {
@@ -82,16 +83,18 @@ exports.modifyBook = (req, res, next) => {
       }
 
       const oldImageUrl = book.imageUrl;
-
+        console.log(1);
       // Mise à jour des informations du livre dans la base de données
       Book.updateOne(
         { _id: req.params.id },
         { ...bookObject, _id: req.params.id, averageRating: book.averageRating }
       )
         .then(() => {
+          console.log(2);
           if (req.file) {
             // Suppression de l'ancienne image si une nouvelle a été fournie
             const filename = oldImageUrl.split("/images/")[1];
+            console.log(3);
             fs.unlink(`images/${filename}`, (err) => {
               if (err) {
                 console.error("Error deleting old image:", err);
